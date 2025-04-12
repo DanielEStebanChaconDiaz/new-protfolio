@@ -97,6 +97,8 @@
         0 20px 40px rgba(0, 0, 0, 0.4),
         0 0 0 1px rgba(0, 216, 255, 0.2);
     overflow: hidden;
+    min-height: 450px; /* Ensure minimum height even on mobile */
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .cvFrameContainer::before {
@@ -113,7 +115,6 @@
     pointer-events: none;
 }
 
-
 .cvFrameContainer:hover::before {
     opacity: 1;
 }
@@ -126,6 +127,38 @@
     position: relative;
     z-index: 2;
     background-color: #fff;
+}
+
+/* Mobile CV placeholder */
+.mobile-cv-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 300px;
+    width: 100%;
+    padding: 2rem;
+    color: #fff;
+    font-size: 1.2rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+}
+
+.mobile-cv-message p {
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+.mobile-cv-message svg {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
 }
 
 .downloadContainer {
@@ -218,6 +251,16 @@
     .cvFrame {
         height: 550px;
     }
+    
+    .orb1 {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .orb2 {
+        width: 200px;
+        height: 200px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -231,6 +274,22 @@
     
     .cvFrame {
         height: 500px;
+    }
+    
+    .mobile-cv-message {
+        min-height: 250px;
+    }
+    
+    .orb1 {
+        width: 200px;
+        height: 200px;
+        filter: blur(60px);
+    }
+    
+    .orb2 {
+        width: 150px;
+        height: 150px;
+        filter: blur(60px);
     }
 }
 
@@ -248,11 +307,20 @@
         margin-bottom: 2rem;
     }
     
-    .cvFrame {
-        height: 450px;
+    .cvFrameContainer {
+        min-height: 200px;
+    }
+    
+    .mobile-cv-message {
+        min-height: 200px;
+        font-size: 1rem;
     }
     
     .cvDownload {
         padding: 0.8rem 1.5rem;
+    }
+    
+    .orb1, .orb2 {
+        filter: blur(40px);
     }
 }

@@ -7,7 +7,7 @@ const projects = [
         description: 'Advanced task management tool with features including custom repetition, notifications, and automatic assignment to multiple users. Built with modern frontend and backend technologies.',
         techs: ['React', 'Cloudinary', 'AppScript', 'Google API', 'Node.js', 'Express', 'MongoDB', 'SQL Server', 'JWT'],
         image: '/onGoing.jpg',
-        link: 'https://github.com/DanielEStebanChaconDiaz/taskProject'
+        link: '#'
     },
     {
         title: 'CineCampus',

@@ -191,10 +191,12 @@
         padding: 5rem 2rem 2rem 2rem;
         z-index: 150;
         overflow-y: auto;
+        display: none; /* Hide nav by default on mobile */
     }
     
     nav.open {
         right: 0;
+        display: block; /* Show nav when open class is applied */
     }
     
     .navList {
