@@ -1,0 +1,184 @@
+.dashboardAbout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    gap: 2rem;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de malla geométrica de fondo */
+.dashboardAbout::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    animation: panBackground 60s linear infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes panBackground {
+    0% { background-position: 0px 0px; }
+    100% { background-position: 100px 100px; }
+}
+
+.textAbout {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    position: relative;
+    z-index: 2;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.8s ease forwards;
+}
+
+@keyframes slideUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.textAbout h1 {
+    font-size: 3.8rem;
+    position: relative;
+    color: #00d8ff;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.textAbout h1::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #00d8ff, transparent);
+    animation: expandLine 1.5s ease forwards 0.5s;
+}
+
+@keyframes expandLine {
+    to { width: 120px; }
+}
+
+.textAbout p {
+    font-size: 1.3rem;
+    line-height: 1.9;
+    color: rgba(224, 247, 250, 0.9);
+    max-width: 95%;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.textAbout strong {
+    color: #ffffff;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+}
+
+.textAbout strong::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background-color: rgba(0, 216, 255, 0.2);
+    z-index: -1;
+    transform: translateY(2px);
+}
+
+.imageAbout {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* Ajustes para hacer la imagen de About Me más grande */
+.imageAbout img {
+    width: 28rem;  /* Aumentado de 22rem a 28rem */
+    height: 28rem; /* Aumentado de 22rem a 28rem */
+    border-radius: 40% 60% 60% 40% / 50% 40% 60% 50%;
+    object-fit: cover;
+    box-shadow: 
+        0 10px 20px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(0, 216, 255, 0.3);
+    border: 5px solid #00d8ff; /* Aumentado el borde para mantener proporciones */
+    transition: all 0.5s ease;
+    filter: saturate(1.1) contrast(1.05);
+    opacity: 1;
+    display: block;
+}
+
+/* Ajustar también los elementos decorativos alrededor de la imagen */
+.imageAbout::before {
+    content: '';
+    position: absolute;
+    width: 30rem; /* Aumentado de 24rem a 30rem */
+    height: 30rem; /* Aumentado de 24rem a 30rem */
+    border: 2px dashed rgba(0, 216, 255, 0.4);
+    border-radius: 40% 60% 50% 50% / 40% 50% 50% 60%;
+    animation: rotateReverse 30s linear infinite;
+}
+
+.imageAbout::after {
+    content: '';
+    position: absolute;
+    width: 33rem; /* Aumentado de 27rem a 33rem */
+    height: 33rem; /* Aumentado de 27rem a 33rem */
+    border: 1px dashed rgba(0, 216, 255, 0.2);
+    border-radius: 60% 40% 50% 50% / 60% 40% 60% 40%;
+    animation: rotate 40s linear infinite;
+}
+
+/* Ajustar el efecto hover para la imagen más grande */
+.imageAbout img:hover {
+    transform: scale(1.03) translateY(-10px); /* Escala ligeramente reducida para el tamaño mayor */
+    box-shadow: 
+        0 20px 30px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(0, 216, 255, 0.4);
+    border-color: #ffffff;
+}
+
+@keyframes morphShape {
+    0% { border-radius: 40% 60% 60% 40% / 50% 40% 60% 50%; }
+    25% { border-radius: 45% 55% 52% 48% / 45% 52% 48% 55%; }
+    50% { border-radius: 50% 50% 46% 54% / 40% 55% 45% 60%; }
+    75% { border-radius: 55% 45% 50% 50% / 50% 45% 55% 50%; }
+    100% { border-radius: 40% 60% 60% 40% / 50% 40% 60% 50%; }
+}
+
+.imageAbout img:hover {
+    transform: scale(1.05) translateY(-10px);
+    box-shadow: 
+        0 20px 30px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(0, 216, 255, 0.4);
+    border-color: #ffffff;
+}
+@keyframes rotate {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes rotateReverse {
+    to { transform: rotate(-360deg); }
+}

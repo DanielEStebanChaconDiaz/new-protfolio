@@ -1,0 +1,353 @@
+.firstContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+    padding: 4rem 6rem;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de partículas flotantes */
+.firstContent::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 40%);
+    animation: pulse 8s infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.3; }
+    100% { opacity: 0.8; }
+}
+
+.textContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.textContent h1 {
+    font-size: 4.5rem;
+    background: linear-gradient(90deg, #00d8ff, #b2fcff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(0, 216, 255, 0.3);
+    letter-spacing: -1px;
+    transform: translateX(-5px);
+    opacity: 0;
+    animation: slideIn 0.8s forwards 0.3s;
+}
+
+.textContent h2 {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+    transform: translateX(-5px);
+    opacity: 0;
+    animation: slideIn 0.8s forwards 0.6s;
+}
+
+@keyframes slideIn {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.8rem;
+    margin-top: 1.5rem;
+    opacity: 0;
+    animation: fadeIn 1s forwards 0.9s;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.icons img, .icons svg {
+    width: 2.8rem;
+    height: 2.8rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+}
+
+.icons img:hover, .icons svg:hover {
+    transform: scale(1.3) translateY(-8px) rotate(5deg);
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.5)) brightness(1.2);
+}
+
+.imageContent {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    animation: floatImage 3s ease-in-out infinite alternate;
+}
+
+@keyframes floatImage {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-15px); }
+}
+
+.imageContent img {
+    width: 25rem;
+    height: 25rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid rgba(0, 216, 255, 0.8);
+    box-shadow: 
+        0 10px 25px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(0, 216, 255, 0.5);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: saturate(1.05);
+    opacity: 1; /* Aseguramos que la imagen sea visible */
+    display: block;
+}
+
+.imageContent img:hover {
+    transform: scale(1.05) rotate(2deg);
+    border-color: #00d8ff;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(0, 216, 255, 0.6),
+        0 0 100px rgba(0, 216, 255, 0.3);
+}
+
+/* Decoración circular adicional */
+.imageContent::before {
+    content: '';
+    position: absolute;
+    width: 28rem;
+    height: 28rem;
+    border-radius: 50%;
+    border: 1px dashed rgba(0, 216, 255, 0.5);
+    animation: rotate 60s linear infinite;
+}
+
+.imageContent::after {
+    content: '';
+    position: absolute;
+    width: 31rem;
+    height: 31rem;
+    border-radius: 50%;
+    border: 1px dashed rgba(0, 216, 255, 0.3);
+    animation: rotate 80s linear infinite reverse;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Icons in the dashboard */
+.firstContent .navList {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.firstContent .navList li a {
+    color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.firstContent .navList li a:hover {
+    color: #00d8ff;
+    transform: translateY(-5px);
+    filter: drop-shadow(0 0 8px rgba(0, 216, 255, 0.6));
+}
+
+/* Media queries for responsive design */
+@media screen and (max-width: 1200px) {
+    .textContent h1 {
+        font-size: 3.8rem;
+    }
+    
+    .textContent h2 {
+        font-size: 1.8rem;
+    }
+    
+    .imageContent img {
+        width: 22rem;
+        height: 22rem;
+    }
+    
+    .imageContent::before {
+        width: 25rem;
+        height: 25rem;
+    }
+    
+    .imageContent::after {
+        width: 28rem;
+        height: 28rem;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .firstContent {
+        padding: 3rem 4rem;
+        gap: 3rem;
+    }
+    
+    .textContent h1 {
+        font-size: 3.2rem;
+    }
+    
+    .textContent h2 {
+        font-size: 1.6rem;
+    }
+    
+    .imageContent img {
+        width: 20rem;
+        height: 20rem;
+    }
+    
+    .imageContent::before {
+        width: 22rem;
+        height: 22rem;
+    }
+    
+    .imageContent::after {
+        width: 24rem;
+        height: 24rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .firstContent {
+        flex-direction: column-reverse;
+        padding: 2rem;
+        gap: 2rem;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .textContent {
+        align-items: center;
+    }
+    
+    .textContent h1 {
+        font-size: 2.8rem;
+    }
+    
+    .textContent h2 {
+        font-size: 1.4rem;
+    }
+    
+    .icons {
+        justify-content: center;
+    }
+    
+    .firstContent .navList {
+        justify-content: center;
+    }
+    
+    .imageContent {
+        margin-top: 2rem;
+        animation: floatImageMobile 3s ease-in-out infinite alternate;
+    }
+    
+    @keyframes floatImageMobile {
+        from { transform: translateY(0px); }
+        to { transform: translateY(-10px); }
+    }
+    
+    .imageContent img {
+        width: 18rem;
+        height: 18rem;
+    }
+    
+    .imageContent::before {
+        width: 20rem;
+        height: 20rem;
+    }
+    
+    .imageContent::after {
+        width: 22rem;
+        height: 22rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .firstContent {
+        padding: 1.5rem;
+        min-height: calc(100vh - 3rem);
+    }
+    
+    .textContent h1 {
+        font-size: 2.3rem;
+    }
+    
+    .textContent h2 {
+        font-size: 1.2rem;
+    }
+    
+    .icons svg {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    .imageContent img {
+        width: 15rem;
+        height: 15rem;
+        border-width: 4px;
+    }
+    
+    .imageContent::before {
+        width: 17rem;
+        height: 17rem;
+    }
+    
+    .imageContent::after {
+        width: 19rem;
+        height: 19rem;
+    }
+}
+
+/* Fix for portrait phones */
+@media screen and (max-width: 380px) {
+    .textContent h1 {
+        font-size: 2rem;
+    }
+    
+    .textContent h2 {
+        font-size: 1.1rem;
+    }
+    
+    .imageContent img {
+        width: 12rem;
+        height: 12rem;
+    }
+    
+    .imageContent::before {
+        width: 14rem;
+        height: 14rem;
+    }
+    
+    .imageContent::after {
+        width: 16rem;
+        height: 16rem;
+    }
+}
