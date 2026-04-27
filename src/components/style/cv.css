@@ -324,3 +324,23 @@
         filter: blur(40px);
     }
 }
+/* Dual download buttons */
+.downloadContainer {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.cvDownloadSecondary {
+    background: transparent !important;
+    border: 2px solid rgba(0, 216, 255, 0.5) !important;
+    color: rgba(0, 216, 255, 0.85) !important;
+}
+
+.cvDownloadSecondary:hover {
+    background: rgba(0, 216, 255, 0.1) !important;
+    border-color: #00d8ff !important;
+    color: #00d8ff !important;
+}

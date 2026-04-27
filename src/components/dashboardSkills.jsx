@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './style/skills.css';
+import { useLang } from '../context/LanguageContext';
 
 export default function Skills() {
     const [animatedSkills, setAnimatedSkills] = useState([]);
+    const { t } = useLang();
 
-    // Skills con sus iconos y niveles de dominio (0-100)
     const skills = [
         { name: 'JavaScript', icon: '⚡', level: 100 },
         { name: 'React', icon: '⚛️', level: 85 },
@@ -17,10 +18,9 @@ export default function Skills() {
         { name: 'Git', icon: '📂', level: 100 },
         { name: 'REST APIs', icon: '🔌', level: 95 },
         { name: 'Vite', icon: '⚡', level: 75 },
-        { name: 'JWT', icon: '🔑', level: 90 }
+        { name: 'JWT', icon: '🔑', level: 90 },
     ];
 
-    // Efecto para animar la aparición de las habilidades de forma escalonada
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
@@ -43,11 +43,9 @@ export default function Skills() {
         <section className="skillsSection" id="skills">
             <div className="skillsContainer">
                 <h2 className="skillsTitle">
-                    Technical <span className="highlight">Skills</span>
+                    {t.skills.title} <span className="highlight">{t.skills.titleHighlight}</span>
                 </h2>
-                <p className="skillsSubtitle">
-                    Technologies I've been working with recently
-                </p>
+                <p className="skillsSubtitle">{t.skills.subtitle}</p>
 
                 <div className="skillsGrid">
                     {skills.map((skill, index) => (
@@ -69,7 +67,6 @@ export default function Skills() {
                 </div>
             </div>
 
-            {/* Elementos decorativos */}
             <div className="glowingOrb orb1"></div>
             <div className="glowingOrb orb2"></div>
             <div className="glowingOrb orb3"></div>

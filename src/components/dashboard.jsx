@@ -1,38 +1,33 @@
 import { useEffect } from 'react';
 import './style/dashboard.css';
 import { Github, Linkedin } from 'lucide-react';
+import { useLang } from '../context/LanguageContext';
 
 export default function Dashboard() {
-    // Optional: Add animation on scroll if needed
-    useEffect(() => {
-        const handleScroll = () => {
-            // You can add scroll animations here if needed
-        };
+    const { t } = useLang();
 
+    useEffect(() => {
+        const handleScroll = () => {};
         window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
         <div className="firstContent">
             <div className="textContent">
-                <h1>Welcome to my portfolio</h1>
-                <h2>
-                    I'm Daniel, a software developer with a passion for creating engaging and user-friendly experiences.
-                </h2>
+                <h1>{t.home.welcome}</h1>
+                <h2>{t.home.intro}</h2>
                 <div className="icons">
                     <nav>
-                        <ul className='navList'>
+                        <ul className="navList">
                             <li>
-                                <a href="https://github.com/DanielEStebanChaconDiaz" aria-label="GitHub Profile">
-                                    <Github size={50}/>
+                                <a href="https://github.com/DanielEStebanChaconDiaz" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                                    <Github size={50} />
                                 </a>
                             </li>
                             <li>
-                                <a href="https://www.linkedin.com/in/danielestebanchacondiaz/" aria-label="LinkedIn Profile">
-                                    <Linkedin size={50}/> 
+                                <a href="https://www.linkedin.com/in/danielestebanchacondiaz/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                                    <Linkedin size={50} />
                                 </a>
                             </li>
                         </ul>
