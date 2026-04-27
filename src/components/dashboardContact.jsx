@@ -34,7 +34,7 @@ export default function Contact() {
 
                 <p className="contactEmail">
                     {t.contact.or}{' '}
-                    <a href="mailto:danielesteban.dev@gmail.com">danielesteban.dev@gmail.com</a>
+                    <a href="mailto:daniel.estebancd@gmail.com">daniel.estebancd@gmail.com</a>
                 </p>
             </div>
         </section>

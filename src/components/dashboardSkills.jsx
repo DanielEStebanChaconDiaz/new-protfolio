@@ -7,6 +7,12 @@ export default function Skills() {
     const { t } = useLang();
 
     const skills = [
+        { name: 'Analisis de datos', icon: '📊', level: 90 },
+        { name: 'n8n', icon: '🟢', level: 100 },
+        { name: 'UI/UX Design', icon: '🎨', level: 85 },
+        { name: 'SEO', icon: '🔍', level: 80 },
+        { name: 'Python', icon: '🐍', level: 90 },
+        { name: 'Wordpress', icon: '📝', level: 100 },
         { name: 'JavaScript', icon: '⚡', level: 100 },
         { name: 'React', icon: '⚛️', level: 85 },
         { name: 'Node.js', icon: '🟢', level: 100 },
