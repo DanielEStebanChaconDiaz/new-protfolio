@@ -5,7 +5,7 @@ import { useLang } from '../context/LanguageContext';
 const projectKeys = [
     {
         key: 'SEO Analyzer',
-        techs: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Google API', 'JWT'],
+        techs: ['React', 'Python', 'PostgreSQL', 'Google API', 'JWT', 'Axios', 'MercadoPago', 'Groq', 'Firebase'],
         image: '/seoAnalyzer.png',
         link: 'https://seo-analyzer-frontend-c6vl.onrender.com',
     },
