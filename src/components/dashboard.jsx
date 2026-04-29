@@ -7,27 +7,32 @@ export default function Dashboard() {
     const { t } = useLang();
 
     useEffect(() => {
-        const handleScroll = () => {};
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        document.querySelectorAll('img').forEach(img => {
+            if (img.complete) img.classList.add('loaded');
+            else img.addEventListener('load', () => img.classList.add('loaded'));
+        });
     }, []);
 
     return (
         <div className="firstContent">
             <div className="textContent">
-                <h1>{t.home.welcome}</h1>
+                <span className="eyebrow">Full-Stack Developer</span>
+                <h1>
+                    Daniel<br />
+                    <span className="line-accent">Esteban.</span>
+                </h1>
                 <h2>{t.home.intro}</h2>
                 <div className="icons">
                     <nav>
                         <ul className="navList">
                             <li>
-                                <a href="https://github.com/DanielEStebanChaconDiaz" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
-                                    <Github size={50} />
+                                <a href="https://github.com/DanielEStebanChaconDiaz" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                                    <Github size={22} />
                                 </a>
                             </li>
                             <li>
-                                <a href="https://www.linkedin.com/in/danielestebanchacondiaz/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                                    <Linkedin size={50} />
+                                <a href="https://www.linkedin.com/in/danielestebanchacondiaz/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                    <Linkedin size={22} />
                                 </a>
                             </li>
                         </ul>
@@ -35,7 +40,7 @@ export default function Dashboard() {
                 </div>
             </div>
             <div className="imageContent">
-                <img src="/hoja de vida.jpg" alt="Daniel Chacon" />
+                <img src="/hoja de vida.jpg" alt="Daniel Esteban Chacon" />
             </div>
         </div>
     );

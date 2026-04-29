@@ -1,8 +1,17 @@
+import { useEffect } from 'react';
 import './style/dashboardAbout.css';
 import { useLang } from '../context/LanguageContext';
 
 export default function TextAbout() {
     const { t } = useLang();
+
+    useEffect(() => {
+        document.querySelectorAll('img').forEach(img => {
+            if (img.complete) img.classList.add('loaded');
+            else img.addEventListener('load', () => img.classList.add('loaded'));
+        });
+    }, []);
+
     return (
         <div className="dashboardAbout">
             <div className="textAbout">
@@ -13,7 +22,7 @@ export default function TextAbout() {
                 <p>{t.about.p4}</p>
             </div>
             <div className="imageAbout">
-                <img src="/image.png" alt="Daniel Chacon" />
+                <img src="/image.png" alt="Daniel Esteban" />
             </div>
         </div>
     );
