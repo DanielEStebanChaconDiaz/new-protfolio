@@ -26,6 +26,13 @@ export default function Skills() {
         { name: 'SQL', icon: '🗄️', level: 90 },
         { name: 'Python', icon: '🐍', level: 90 },
         { name: 'Laravel', icon: '🎯', level: 70 },
+        { name: 'Stripe', icon: '💳', level: 100 },
+        { name: 'Cloudinary', icon: '☁️', level: 100 },
+        { name: 'Firebase', icon: '🔥', level: 100 },
+        { name: 'Socket.io', icon: '🔗', level: 80 },
+        { name: 'Axios', icon: '📡', level: 100 },
+        { name: 'Groq', icon: '🔍', level: 100 },
+        { name: 'MercadoPago', icon: '💰', level: 100 },
     ];
 
     useEffect(() => {
