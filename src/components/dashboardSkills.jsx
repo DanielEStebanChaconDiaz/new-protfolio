@@ -12,13 +12,20 @@ export default function Skills() {
         { name: 'Node.js', icon: '🟢', level: 100 },
         { name: 'Express', icon: '🚀', level: 100 },
         { name: 'MongoDB', icon: '🍃', level: 100 },
-        { name: 'SQL Server', icon: '📊', level: 60 },
+        { name: 'SQL Server', icon: '📊', level: 80 },
         { name: 'HTML', icon: '📝', level: 100 },
         { name: 'CSS', icon: '🎨', level: 95 },
         { name: 'Git', icon: '📂', level: 100 },
         { name: 'REST APIs', icon: '🔌', level: 95 },
         { name: 'Vite', icon: '⚡', level: 75 },
         { name: 'JWT', icon: '🔑', level: 90 },
+        { name: 'Wordpress', icon: '🌐', level: 80 },
+        { name: 'Docker', icon: '🐳', level: 30 },
+        { name: 'React Native', icon: '📱', level: 50 },
+        { name: 'TypeScript', icon: '🔷', level: 40 },
+        { name: 'SQL', icon: '🗄️', level: 90 },
+        { name: 'Python', icon: '🐍', level: 90 },
+        { name: 'Laravel', icon: '🎯', level: 70 },
     ];
 
     useEffect(() => {
