@@ -1,82 +1,82 @@
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Languages } from 'lucide-react';
 import './style/header.css';
 import { useLang } from '../context/LanguageContext';
+import { useActiveSection } from '../hooks/useActiveSection';
 
-export default function Headers() {
-    const [isOpen, setIsOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
-    const { lang, t, toggleLang } = useLang();
-    const location = useLocation();
+const sectionIds = ['about', 'experience', 'skills', 'projects', 'terminal', 'contact'];
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 10);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const { t, toggleLang } = useLang();
+  const active = useActiveSection(sectionIds);
 
-    // Close menu on route change
-    useEffect(() => {
-        setIsOpen(false);
-    }, [location]);
-
-    const handleLinkClick = () => {
-        setIsOpen(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setIsScrolled(window.scrollY > 10);
+      setProgress(max > 0 ? window.scrollY / max : 0);
     };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-    const navLinks = [
-        { label: t.nav.home, to: '/' },
-        { label: t.nav.about, to: '/about' },
-        { label: t.nav.skills, to: '/skills' },
-        { label: t.nav.projects, to: '/projects' },
-        { label: t.nav.cv, to: '/cv' },
-        { label: t.nav.contact, to: '/contact' },
-    ];
+  // Bloquear scroll y cerrar con Escape mientras el menú móvil está abierto
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e) => e.key === 'Escape' && setIsOpen(false);
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [isOpen]);
 
-    return (
-        <div className={`header ${isScrolled ? 'scrolled' : ''}`}>
-            <h1 className="headerLogo">Daniel Chacon</h1>
+  const close = () => setIsOpen(false);
 
-            {/* Hamburger Menu Button */}
-            <div
-                className={`hamburger ${isOpen ? 'active' : ''}`}
-                onClick={() => setIsOpen(!isOpen)}
-                aria-label="Toggle menu"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+  return (
+    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+      <a href="#top" className="headerLogo" onClick={close}>
+        <span className="logoBracket">&lt;</span>DanielChacon<span className="logoBracket"> /&gt;</span>
+      </a>
 
-            {/* Navigation */}
-            <nav className={isOpen ? 'open' : ''}>
-                <ul className="navList">
-                    {navLinks.map(({ label, to }) => (
-                        <li key={to} className={location.pathname === to ? 'active' : ''}>
-                            <Link to={to} onClick={handleLinkClick}>{label}</Link>
-                        </li>
-                    ))}
-                    <li>
-                        <button
-                            className="langToggle"
-                            onClick={() => { toggleLang(); handleLinkClick(); }}
-                            aria-label="Toggle language"
-                        >
-                            {lang === 'es' ? '🇺🇸 EN' : '🇨🇴 ES'}
-                        </button>
-                    </li>
-                </ul>
-            </nav>
+      <nav id="mainNav" className={isOpen ? 'open' : ''} aria-label="Principal">
+        <ul className="navList">
+          {sectionIds.map((id) => (
+            <li key={id}>
+              <a href={`#${id}`} className={active === id ? 'active' : ''} onClick={close}>
+                {t.nav[id]}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
-            {/* Overlay when mobile menu is open */}
-            {isOpen && (
-                <div
-                    className="menuOverlay"
-                    onClick={() => setIsOpen(false)}
-                />
-            )}
-        </div>
-    );
+      <div className="headerActions">
+        <button type="button" className="langToggle" onClick={toggleLang} aria-label={t.header.langAria}>
+          <Languages size={16} aria-hidden="true" />
+          {t.header.lang}
+        </button>
+        <button
+          type="button"
+          className={`hamburger ${isOpen ? 'active' : ''}`}
+          onClick={() => setIsOpen((open) => !open)}
+          aria-label={isOpen ? t.header.closeMenu : t.header.openMenu}
+          aria-expanded={isOpen}
+          aria-controls="mainNav"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      {isOpen && <div className="menuOverlay" onClick={close} />}
+      <div className="scrollProgress" style={{ transform: `scaleX(${progress})` }} />
+    </header>
+  );
 }

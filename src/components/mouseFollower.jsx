@@ -1,75 +1,55 @@
 import { useEffect, useRef, useState } from 'react';
 
-function MouseFollower() {
-    const followerRef = useRef(null);
-    const mouse = useRef({ x: 0, y: 0 });
-    const pos = useRef({ x: 0, y: 0 });
-    const [isMobile, setIsMobile] = useState(false);
+const interactive = 'a, button, input, textarea, label, [role="tab"]';
 
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth <= 768 || 'ontouchstart' in window);
-        };
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
+// Cursor que sigue al mouse y crece sobre elementos interactivos (solo punteros finos)
+export default function MouseFollower() {
+  const followerRef = useRef(null);
+  const [enabled] = useState(
+    () =>
+      window.matchMedia('(pointer: fine)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  );
 
-    useEffect(() => {
-        if (isMobile) return;
+  useEffect(() => {
+    if (!enabled) return;
+    const mouse = { x: -100, y: -100 };
+    const pos = { x: -100, y: -100 };
+    let frame;
 
-        const handleMouseMove = (e) => {
-            mouse.current.x = e.clientX;
-            mouse.current.y = e.clientY;
-        };
+    const onMove = (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      followerRef.current?.classList.toggle('hovering', Boolean(e.target.closest?.(interactive)));
+    };
+    const onLeave = () => followerRef.current?.classList.add('hidden');
+    const onEnter = () => followerRef.current?.classList.remove('hidden');
 
-        window.addEventListener('mousemove', handleMouseMove);
+    const animate = () => {
+      pos.x += (mouse.x - pos.x) * 0.15;
+      pos.y += (mouse.y - pos.y) * 0.15;
+      if (followerRef.current) {
+        followerRef.current.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
+      }
+      frame = requestAnimationFrame(animate);
+    };
 
-        let animFrameId;
-        const animate = () => {
-            pos.current.x += (mouse.current.x - pos.current.x) * 0.1;
-            pos.current.y += (mouse.current.y - pos.current.y) * 0.1;
+    window.addEventListener('mousemove', onMove, { passive: true });
+    document.addEventListener('mouseleave', onLeave);
+    document.addEventListener('mouseenter', onEnter);
+    frame = requestAnimationFrame(animate);
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseleave', onLeave);
+      document.removeEventListener('mouseenter', onEnter);
+      cancelAnimationFrame(frame);
+    };
+  }, [enabled]);
 
-            const el = followerRef.current;
-            if (el) {
-                el.style.left = `${pos.current.x - 15}px`;
-                el.style.top = `${pos.current.y - 15}px`;
-            }
-
-            animFrameId = requestAnimationFrame(animate);
-        };
-
-        animFrameId = requestAnimationFrame(animate);
-
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            cancelAnimationFrame(animFrameId);
-        };
-    }, [isMobile]);
-
-    if (isMobile) return null;
-
-    return (
-        <div
-            ref={followerRef}
-            style={{
-                position: 'fixed',
-                width: '30px',
-                height: '30px',
-                background: '#ffffff69',
-                borderRadius: '50%',
-                pointerEvents: 'none',
-                transition: `
-                    width 0.3s cubic-bezier(.3, 0, .3, 1),
-                    height 0.3s cubic-bezier(.3, 0, .3, 1),
-                    background 0.3s cubic-bezier(.3, 0, .3, 1),
-                    margin 0.3s cubic-bezier(.3, 0, .3, 1),
-                    border-color 0.7s cubic-bezier(.3, 0, .3, 1)
-                `,
-                zIndex: 9999,
-            }}
-        />
-    );
+  if (!enabled) return null;
+  return (
+    <div ref={followerRef} className="mouseFollower" aria-hidden="true">
+      <span />
+    </div>
+  );
 }
-
-export default MouseFollower;

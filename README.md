@@ -1,12 +1,33 @@
-# React + Vite
+# Portafolio — Daniel Chacon
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portafolio personal de **Daniel Esteban Chacon Diaz**, desarrollador Full-Stack (React, Node.js, Python, SQL/NoSQL) enfocado en IA y automatización.
 
-Currently, two official plugins are available:
+Single-page en React 19 + Vite, bilingüe (ES/EN) y sin dependencias de UI más allá de `lucide-react`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Secciones
 
-## Expanding the ESLint configuration
+- **Hero** con roles animados, CTA y estadísticas calculadas desde los datos.
+- **Sobre mí**, idiomas y competencias.
+- **Trayectoria**: línea de tiempo de experiencia y formación.
+- **Habilidades**: filtro por categoría; al hacer clic en una tecnología muestra en qué experiencia/proyecto se usó y permite saltar a él.
+- **Proyectos**: filtro por categoría y caso destacado (DENTI) con diagrama de arquitectura interactivo.
+- **Terminal**: consola funcional (`help`, `skills`, `projects`, `goto`, `cv`…) con historial (↑/↓) y autocompletado (Tab).
+- **Contacto**: descarga de CV, formulario que abre el cliente de correo y botón para copiar el email.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Editar el contenido
+
+Todo el contenido está centralizado; no hace falta tocar los componentes:
+
+- [src/data/portfolio.js](src/data/portfolio.js) — perfil, experiencia, formación, habilidades, proyectos y diagrama de DENTI.
+- [src/data/ui.js](src/data/ui.js) — textos de interfaz en español e inglés.
+- `public/cv-es.pdf` y `public/cv-en.pdf` — hojas de vida descargables.
+
+## Scripts
+
+```bash
+npm install
+npm run dev      # desarrollo
+npm run build    # build de producción en dist/
+npm run preview  # servir el build
+npm run lint
+```

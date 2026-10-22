@@ -1,30 +1,33 @@
-import './App.css'
-import { HashRouter, Routes, Route } from 'react-router-dom'
-import Home from './views/home'
-import About from './views/about'
-import SkillsPage from './views/skills'
-import MouseFollower from './components/mouseFollower'
-import ProjectsPage from './views/projects'
-import CV from './views/cv'
-import ContactPage from './views/contact'
-import { LanguageProvider } from './context/LanguageContext'
+import { LanguageProvider } from './context/LanguageContext';
+import Header from './components/header';
+import Hero from './components/hero';
+import About from './components/about';
+import Experience from './components/experience';
+import Skills from './components/skills';
+import Projects from './components/projects';
+import Terminal from './components/terminal';
+import Contact from './components/contact';
+import Footer from './components/footer';
+import MouseFollower from './components/mouseFollower';
 
 function App() {
   return (
     <LanguageProvider>
-      <HashRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/skills" element={<SkillsPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/cv" element={<CV />} />
-          <Route path="/contact" element={<ContactPage />} />
-        </Routes>
-        <MouseFollower />
-      </HashRouter>
+      <a href="#about" className="skipLink">Skip to content</a>
+      <Header />
+      <main>
+        <Hero />
+        <About />
+        <Experience />
+        <Skills />
+        <Projects />
+        <Terminal />
+        <Contact />
+      </main>
+      <Footer />
+      <MouseFollower />
     </LanguageProvider>
-  )
+  );
 }
 
-export default App
+export default App;
